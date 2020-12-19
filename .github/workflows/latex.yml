@@ -11,6 +11,7 @@ jobs:
         root_file: |
           main.tex
           martin.tex
+          cartella/mase.tex
         working_directory: latex_sources/
         #args: -jobname=my_doc -pdf -file-line-error -halt-on-error -interaction=nonstopmode
         #compiler: latexmk
