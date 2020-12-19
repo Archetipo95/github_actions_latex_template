@@ -8,16 +8,19 @@ jobs:
     - name: Build document
       uses: xu-cheng/latex-action@v2
       with:
-        root_file: main.tex
+        root_file: |
+          main.tex
+          martin.tex
         working_directory: latex_sources/
-        args: -jobname=my_doc -pdf -file-line-error -halt-on-error -interaction=nonstopmode
-        compiler: latexmk
+        #args: -jobname=my_doc -pdf -file-line-error -halt-on-error -interaction=nonstopmode
+        #compiler: latexmk
     
     - name: Upload pdf document
       uses: actions/upload-artifact@v2
       with:
-        name: my_doc
-        path: latex_sources/my_doc.pdf
+        #name: my_docs
+        path: latex_sources/*.pdf
+  
   deploy:
     runs-on: ubuntu-latest
     if: github.ref == 'refs/heads/master'
@@ -32,7 +35,7 @@ jobs:
       - name: Download artifacts
         uses: actions/download-artifact@v2
         with:
-          name: my_doc
+          name: my_docs
       
       - name: Create Release
         uses: actions/create-release@v1
@@ -41,7 +44,7 @@ jobs:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }} # This token is provided by Actions
         with:
           tag_name: my_doc-${{ steps.vars.outputs.date }}-${{ steps.vars.outputs.sha8 }}
-          release_name: Documenti in PDF (version ${{ steps.vars.outputs.date }})
+          release_name: Documenti in PDF (versione ${{ steps.vars.outputs.date }})
           draft: false
           prerelease: false
       
