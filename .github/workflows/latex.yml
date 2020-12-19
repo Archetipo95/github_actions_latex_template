@@ -25,6 +25,12 @@ jobs:
       with:
         name: my_docs
         path: latex_sources/*.pdf
+        
+    - name: Upload
+      uses: actions/upload-artifact@PDF
+      with:
+        name: test
+        path: test
   
   deploy:
     runs-on: ubuntu-latest
