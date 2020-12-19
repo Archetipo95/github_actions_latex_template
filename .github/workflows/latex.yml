@@ -21,27 +21,23 @@ jobs:
   deploy:
     runs-on: ubuntu-latest
     if: github.ref == 'refs/heads/master'
-    # Можно зависеть от любого другого job. Порядок выполнения будет подстраиваться.
     needs: [build]
     steps:
-      # Это хак, чтобы дергать bash-команды и запоминанать их результат
       - name: Variables
-        # id используется внутренне: по нему можно ссылаться на результаты из другого step
         id: vars
-        # echo в таком форматировании позволит впоследствии ссылаться на результаты через ${{ steps.<step_id>.outputs.<variable_name> }}
         run: |
           echo "::set-output name=date::$(date +'%Y-%m-%d')"
           echo "::set-output name=sha8::$(echo ${GITHUB_SHA} | cut -c1-8)"
+      
       - name: Download artifacts
         uses: actions/download-artifact@v2
         with:
-          # Тот самый ключ, который мы указывали в upload-artifact
           name: my_doc
+      
       - name: Create Release
         uses: actions/create-release@v1
         id: create_release
         env:
-          # По офф.документации, надо указать GITHUB_TOKEN
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }} # This token is provided by Actions
         with:
           # Берем результат из step с id=vars (см. выше). 
