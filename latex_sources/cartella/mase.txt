@@ -1,0 +1,5 @@
+\documentclass[40pt]{article}
+\begin{document}
+Hello world! by martin maseee
+$Hello world!$ %math mode 
+\end{document}
