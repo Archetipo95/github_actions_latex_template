@@ -20,7 +20,7 @@ jobs:
       uses: actions/upload-artifact@v2
       with:
         #name: my_docs
-        path: latex_sources/*.pdf
+        path: latex_sources/**/*.pdf
   
   deploy:
     runs-on: ubuntu-latest
