@@ -38,27 +38,19 @@ jobs:
         uses: actions/create-release@v1
         id: create_release
         env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }} # This token is provided by Actions
+          GITHUB_TOKEN: ${{ secrets.TOKEN_MARTIN }} # This token is provided by Actions
         with:
-          # Берем результат из step с id=vars (см. выше). 
-          # Получим теги вида “my_doc-<дата билда>-<первые 8 символов из sha коммита>
           tag_name: my_doc-${{ steps.vars.outputs.date }}-${{ steps.vars.outputs.sha8 }}
-          # Имя, которое будет высвечиваться в релизе
           release_name: My Actions document (version ${{ steps.vars.outputs.date }})
-          # Наш релиз не набросок и не пререлиз, так что оба в false
           draft: false
           prerelease: false
-      # Прикладываемые файлы надо заливать отдельным step
+      
       - name: Upload pdf asset
         uses: actions/upload-release-asset@v1
         env:
-          # Тоже требуется токен
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          GITHUB_TOKEN: ${{ secrets.TOKEN_MARTIN }}
         with:
-          # Из предыдущего step с id=create_release генерится upload_url - по нему и надо заливать
           upload_url: ${{ steps.create_release.outputs.upload_url }}
-          # Не переходим в папку latex_sources, поскольку download-artifacts грузит в текущую директорию
           asset_path: ./my_doc.pdf
-          # Имя, которое будет высвечиваться в релизе
           asset_name: my_asset_name.pdf
           asset_content_type: application/pdf
