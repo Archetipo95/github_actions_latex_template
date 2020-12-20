@@ -20,63 +20,10 @@ jobs:
         #args: -jobname=my_doc -pdf -file-line-error -halt-on-error -interaction=nonstopmode
         #compiler: latexmk
     
-    - name: Upload pdf document
-      uses: actions/upload-artifact@v2
-      with:
-        name: my_docs
-        path: latex_sources/*.pdf
-  
-  deploy:
-    runs-on: ubuntu-latest
-    if: github.ref == 'refs/heads/master'
-    needs: [build]
-    steps:
-      - name: Variables
-        id: vars
-        run: |
-          echo "::set-output name=date::$(date +'%Y-%m-%d')"
-          echo "::set-output name=sha8::$(echo ${GITHUB_SHA} | cut -c1-8)"
-      
-      - name: Download artifacts
-        uses: actions/download-artifact@v2
-        with:
-          name: my_docs
-      
-      - name: Create Release
-        uses: actions/create-release@v1
-        id: create_release
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }} # This token is provided by Actions
-        with:
-          tag_name: my_doc-${{ steps.vars.outputs.date }}-${{ steps.vars.outputs.sha8 }}
-          release_name: Documenti in PDF (versione ${{ steps.vars.outputs.date }})
-          draft: false
-          prerelease: false
-      
-      - name: prova upload
-        uses: shogo82148/actions-upload-release-asset@v1
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-        with:
-          upload_url: ${{ steps.create_release.outputs.upload_url }}
-          asset_path: ./*.pdf
-            #!*.zip
-            #!*.tar.gz
-            
-      # Deploy to local repo
-      - name: Deploy prova
-        uses: s0/git-publish-subdir-action@develop
-        env:
+    - name: Deploy prova
+      uses: s0/git-publish-subdir-action@develop
+      env:
           REPO: self
           BRANCH: PDF
           FOLDER: ./*.pdf
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-             
-     # - name: Upload pdf asset
-     #   uses: actions/upload-release-asset@v1
-     #   env:
-     #     GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-      #  with:
-      #    upload_url: ${{ steps.create_release.outputs.upload_url }}
-      #    asset_path: ./*.pdf
-       #   asset_content_type: application/pdf
