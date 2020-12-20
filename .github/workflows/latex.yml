@@ -25,5 +25,5 @@ jobs:
       env:
           REPO: self
           BRANCH: PDF
-          FOLDER: latex_sources/*.pdf
+          FOLDER: latex_sources
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
