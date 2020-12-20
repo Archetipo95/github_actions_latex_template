@@ -20,10 +20,35 @@ jobs:
         #args: -jobname=my_doc -pdf -file-line-error -halt-on-error -interaction=nonstopmode
         #compiler: latexmk
     
-    - name: Deploy prova
-      uses: s0/git-publish-subdir-action@develop
-      env:
-          REPO: self
-          BRANCH: PDF
-          FOLDER: latex_sources
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+    - name: Upload pdf document
+      uses: actions/upload-artifact@v2
+      with:
+        name: my_docs
+        path: latex_sources/*.pdf
+  
+  deploy:
+    runs-on: ubuntu-latest
+    if: github.ref == 'refs/heads/master'
+    needs: [build]
+    steps:
+      - name: Variables
+        id: vars
+        run: |
+          echo "::set-output name=date::$(date +'%Y-%m-%d')"
+          echo "::set-output name=sha8::$(echo ${GITHUB_SHA} | cut -c1-8)"
+      
+      - name: Download artifacts
+        uses: actions/download-artifact@v2
+        with:
+          name: my_docs
+          path: pdfs
+          
+      - name: Deploy prova
+        uses: s0/git-publish-subdir-action@develop
+        env:
+            REPO: self
+            BRANCH: PDF
+            FOLDER: pdfs
+            GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      
+      
