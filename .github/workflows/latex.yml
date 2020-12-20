@@ -61,8 +61,8 @@ jobs:
           upload_url: ${{ steps.create_release.outputs.upload_url }}
           asset_path: |
             ./*.pdf
-            !./*.zip
-            !./*.tar.gz
+            !*.zip
+            !*.tar.gz
              
      # - name: Upload pdf asset
      #   uses: actions/upload-release-asset@v1
