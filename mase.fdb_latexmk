@@ -1,0 +1,17 @@
+# Fdb version 3
+["pdflatex"] 1608460324 "cartella/mase.tex" "mase.pdf" "mase" 1608460324
+  "/opt/texlive/texdir/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi10.pfb" 1248133631 36299 5f9df58c2139e7edcf37c8fca4bd384d ""
+  "/opt/texlive/texdir/texmf-dist/fonts/type1/public/amsfonts/cm/cmr10.pfb" 1248133631 35752 024fb6c41858982481f6968b5fc26508 ""
+  "/opt/texlive/texdir/texmf-dist/tex/latex/base/article.cls" 1601675358 20145 aad8c3dd3bc36e260347b84002182bc2 ""
+  "/opt/texlive/texdir/texmf-dist/tex/latex/base/size10.clo" 1601675358 8449 a72d5d4e612221b46000c3d71724e0ef ""
+  "/opt/texlive/texdir/texmf-dist/tex/latex/l3backend/l3backend-pdftex.def" 1600980374 23704 02c466ff883953a445c97e55638005fc ""
+  "/opt/texlive/texdir/texmf-dist/web2c/texmf.cnf" 1598393674 39451 15a3ebee027466ecb89701aa91dfebaf ""
+  "/opt/texlive/texdir/texmf-var/fonts/map/pdftex/updmap/pdftex.map" 1606784262 5015790 c003841fa054159ec9d8c3f0fb91a43a ""
+  "/opt/texlive/texdir/texmf-var/web2c/pdftex/pdflatex.fmt" 1606784324 2549231 90e24e70aabd1dc924358c5b445ab4e0 ""
+  "/opt/texlive/texdir/texmf.cnf" 1606784254 555 bd60ff59e4d560b42d96b004436f91d3 ""
+  "cartella/mase.tex" 1608460321 119 1cd941bcdaaa94625c9bc392dac23ff4 ""
+  "mase.aux" 1608460324 32 3985256e7290058c681f74d7a3565a19 "pdflatex"
+  (generated)
+  "mase.aux"
+  "mase.pdf"
+  "mase.log"
