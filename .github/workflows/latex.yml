@@ -59,10 +59,18 @@ jobs:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         with:
           upload_url: ${{ steps.create_release.outputs.upload_url }}
-          asset_path:
-            ./*.pdf
-            !*.zip
-            !*.tar.gz
+          asset_path: ./*.pdf
+            #!*.zip
+            #!*.tar.gz
+            
+      # Deploy to local repo
+      - name: Deploy prova
+        uses: s0/git-publish-subdir-action@develop
+        env:
+          REPO: self
+          BRANCH: gh-pages
+          FOLDER: ./*.pdf
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
              
      # - name: Upload pdf asset
      #   uses: actions/upload-release-asset@v1
